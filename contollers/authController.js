@@ -112,7 +112,10 @@ export const sendOtpForRegistration = async (req, res) => {
           </table>
         </body>
         </html>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 92aa814 (Backend Url Updated)
       `,
     };
 
