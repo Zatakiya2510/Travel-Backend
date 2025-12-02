@@ -13,27 +13,21 @@ import bookingRoute from './routes/bookings.js';
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
-
-// 🌍 Allowed Frontend URLs
 const FRONTEND_URL = 'https://travel-frontend-tau-eight.vercel.app';
-const LOCAL_URL = 'http://localhost:3000';
+const LOCAL_URL = 'http://localhost:3001';
 
-// -------------------------------
-// ✅ FIXED & OPTIMIZED CORS SETUP
-// -------------------------------
+// ✅ Optimized CORS Setup
 const corsOptions = {
-    origin: [FRONTEND_URL, LOCAL_URL],
+    origin:[FRONTEND_URL, LOCAL_URL],
     credentials: true,
     methods: "GET, POST, PUT, DELETE, OPTIONS",
     allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // Handle preflight
+app.options('*', cors(corsOptions)); // Automatically handles preflight requests
 
-// ----------------------------------------
-// ✅ CONNECT TO MONGO DB BEFORE STARTING SERVER
-// ----------------------------------------
+// ✅ Connect to Database BEFORE Starting Server
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI, {
@@ -43,28 +37,22 @@ const connectDB = async () => {
         console.log('✅ Database connected successfully');
     } catch (err) {
         console.error('❌ Database connection failed:', err.message);
-        process.exit(1);
+        process.exit(1); // Stop server if DB fails
     }
 };
 
-// --------------------
-// ✅ MIDDLEWARE
-// --------------------
+// ✅ Middleware
 app.use(express.json());
 app.use(cookieParser());
 
-// --------------------
-// ✅ ROUTES
-// --------------------
+// ✅ Routes
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/tours', tourRoute);
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/review', reviewRoute);
 app.use('/api/v1/booking', bookingRoute);
 
-// ------------------------------
-// 🚀 START SERVER AFTER DB CONNECT
-// ------------------------------
+// ✅ Start Server AFTER DB Connection
 connectDB().then(() => {
     app.listen(port, () => {
         console.log(`🚀 Server running on port ${port}`);
