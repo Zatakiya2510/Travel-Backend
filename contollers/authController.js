@@ -13,6 +13,8 @@ const otpStorage = new Map();
 
 // ✅ Configure Nodemailer
 const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
   service: "Gmail",
   auth: {
     user: process.env.EMAIL_USER,
