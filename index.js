@@ -13,21 +13,27 @@ import bookingRoute from './routes/bookings.js';
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
+
+// 🌍 Allowed Frontend URLs
 const FRONTEND_URL = 'https://travel-frontend-tau-eight.vercel.app';
 const LOCAL_URL = 'http://localhost:3000';
 
-// ✅ Optimized CORS Setup
+// -------------------------------
+// ✅ FIXED & OPTIMIZED CORS SETUP
+// -------------------------------
 const corsOptions = {
-    origin:[FRONTEND_URL, LOCAL_URL],
+    origin: [FRONTEND_URL, LOCAL_URL],
     credentials: true,
     methods: "GET, POST, PUT, DELETE, OPTIONS",
     allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Automatically handles preflight requests
+app.options("*", cors(corsOptions)); // Handle preflight
 
-// ✅ Connect to Database BEFORE Starting Server
+// ----------------------------------------
+// ✅ CONNECT TO MONGO DB BEFORE STARTING SERVER
+// ----------------------------------------
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI, {
@@ -37,22 +43,28 @@ const connectDB = async () => {
         console.log('✅ Database connected successfully');
     } catch (err) {
         console.error('❌ Database connection failed:', err.message);
-        process.exit(1); // Stop server if DB fails
+        process.exit(1);
     }
 };
 
-// ✅ Middleware
+// --------------------
+// ✅ MIDDLEWARE
+// --------------------
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Routes
+// --------------------
+// ✅ ROUTES
+// --------------------
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/tours', tourRoute);
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/review', reviewRoute);
 app.use('/api/v1/booking', bookingRoute);
 
-// ✅ Start Server AFTER DB Connection
+// ------------------------------
+// 🚀 START SERVER AFTER DB CONNECT
+// ------------------------------
 connectDB().then(() => {
     app.listen(port, () => {
         console.log(`🚀 Server running on port ${port}`);
