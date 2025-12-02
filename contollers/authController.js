@@ -11,16 +11,20 @@ dotenv.config();
 // ✅ In-memory OTP storage (use Redis in production)
 const otpStorage = new Map();
 
-// ✅ Configure Nodemailer
+// ✅ Configure Nodemailer (Render safe SMTP settings)
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
-  service: "Gmail",
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    pass: process.env.EMAIL_PASS, // MUST be Gmail App Password
+  },
+  tls: {
+    rejectUnauthorized: false,
   },
 });
+
 
 // ✅ Generate a 4-digit OTP
 const generateOTP = () => crypto.randomInt(1000, 9999).toString();
