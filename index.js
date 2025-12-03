@@ -13,7 +13,7 @@ import bookingRoute from './routes/bookings.js';
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
-const FRONTEND_URL = 'https://travel-frontend-tau-eight.vercel.app';
+const FRONTEND_URL = 'https://travel-frontend-chi-three.vercel.app';
 const LOCAL_URL = 'http://localhost:3001';
 
 // ✅ Optimized CORS Setup
