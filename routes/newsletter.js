@@ -1,5 +1,5 @@
 import express from "express";
-import { notifyAdminOfVisitor } from "../controllers/newsletterController.js";
+import { notifyAdminOfVisitor } from "../contollers/newsletterController.js";
 
 const router = express.Router();
 
