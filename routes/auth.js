@@ -9,6 +9,6 @@ router.post("/register", register); // Step 3: Register user
 router.post("/login", login); // Step 4: Login
 router.post("/send-reset-otp", sendOtpForPasswordReset);
 router.post("/verify-reset-otp",verifyResetOtp)
-router.post("/reset-password", setNewPassword);
+router.post("/set-new-password", setNewPassword);
 
 export default router;
