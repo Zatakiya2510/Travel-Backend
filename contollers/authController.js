@@ -287,12 +287,74 @@ export const sendOtpForPasswordReset = async (req, res) => {
       to: normalizedEmail,
       subject: "Password Reset OTP - Travel World",
       html: `
-        <p>Hi,</p>
-        <p>Your OTP for password reset is:</p>
-        <h2 style="color:#d9534f">${otp}</h2>
-        <p>This OTP will expire in <b>2 minutes</b>.</p>
-        <p>If you did not request this, please ignore.</p>
-      `
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Travel World - Password Reset OTP</title>
+</head>
+
+<body style="margin:0; padding:0; background-color:#f2f2f2; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f2f2f2;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #d9534f, #c9302c); padding:35px 20px; text-align:center; color:#fff;">
+              <h1 style="font-size:28px; font-weight:900; margin:0;">🔑 Password Reset OTP</h1>
+              <h2 style="font-size:16px; font-weight:400; margin:8px 0 0;">Secure your Travel World account</h2>
+            </td>
+          </tr>
+
+          <!-- OTP Content -->
+          <tr>
+            <td style="padding:30px; font-size:16px; color:#333;">
+              <p style="margin-bottom:15px;">Hi,</p>
+
+              <p style="margin-bottom:20px;">
+                Your OTP for password reset is:
+                <span style="display:inline-block; font-weight:bold; background-color:#d9534f; color:#ffffff; padding:8px 14px; border-radius:6px; font-size:20px;">
+                  ${otp}
+                </span>
+              </p>
+
+              <p style="margin-bottom:20px;">
+                ⏳ This code is valid for <br />
+                <span style="font-weight:bold; background-color:#fff3cd; color:#856404; padding:4px 8px; border-radius:4px;">
+                  2 minutes
+                </span>
+                only.
+              </p>
+
+              <p style="margin-bottom:20px;">🔒 <strong>Do not share this OTP with anyone.</strong></p>
+
+              <p style="margin-bottom:20px;">If you did not request this password reset, please ignore this email.</p>
+
+              <p style="margin-top:30px;">Thank you,<br /><strong>Travel World Team</strong></p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px; font-size:12px; text-align:center; color:#888;">
+              <hr style="border:0; border-top:1px solid #ddd; margin-bottom:15px;">
+              This is an official communication from <strong>Travel World</strong><br />
+              &copy; 2025 <strong>Travel World</strong> - Your Trusted Travel Partner<br />
+              📞 +91-6352342951 | <br/>
+              ✉️ <a href="mailto:travelworld2904@gmail.com" style="color:#d9534f; text-decoration:none;">travelworld2904@gmail.com</a>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`
     });
 
     return res.status(200).json({
