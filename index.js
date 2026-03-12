@@ -14,8 +14,8 @@ import newsletterRoute from "./routes/newsletter.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
-const FRONTEND_URL = 'https://travel-frontend-chi-three.vercel.app';
-const LOCAL_URL = 'http://localhost:3001';
+const FRONTEND_URL = 'https://travel-frontend-umber-three.vercel.app';
+const LOCAL_URL = 'http://localhost:3000';
 
 // ✅ Optimized CORS Setup
 const corsOptions = {
